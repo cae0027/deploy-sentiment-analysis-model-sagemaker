@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Sentiment Analysis Web App</title>
+        <meta charset="utf-8">
+        <meta name="viewport"  content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+        <script>
+         "use strict";
+         function submitForm(oFormElement) {
+             var xhr = new XMLHttpRequest();
+             xhr.onload = function() {
+                 var result = parseFloat(xhr.responseText);
+                 var resultElement = document.getElementById('result');
+                 if (result == 0) {
+                     resultElement.className = 'bg-danger';
+                     resultElement.innerHTML = "Hi there, I'm not well tuned but I can tell your review is NEGATIVE &#x1F61E;";
+                 } else {
+                     resultElement.className = 'bg-success';
+                     resultElement.innerHTML = "Hi there, I'm not well tuned but I can tell your review is POSITIVE &#x1F607;";
+                 }
+             }
+             xhr.open (oFormElement.method, oFormElement.action, true);
+             var review = document.getElementById('review');
+             xhr.send (review.value);
+             return false;
+         }
+        </script>
+
+    <!-- additional styles -->
+    <style>
+        button[type=submit] {
+          
+          position: relative;
+          width: 50%;
+          background-color: #496e9c;
+          color: white;
+          padding: 14px 20px;
+          margin: 40px 0;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
+          top: 50%;
+          left: 50%;
+          -ms-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+            }
+
+        button[type=submit]:hover {
+          background-color: #f68026;
+        }
+
+        .container{padding-right:35px;padding-left:35px; padding-bottom: 18%; margin-right:auto;margin-left:auto;
+                    border-style: solid;
+                    border-color: #92a8d1;
+                    }
+        @media (min-width:768px){
+            .container{width:750px}}
+        @media (min-width:992px){.container{width:970px}}
+        @media (min-width:1200px){.container{width:1170px}}
+        @media (min-width:1200px){.container{height:3270px}}
+
+        .bg-success{background-color:#dff0d8;
+            border-radius: 10px;
+            border-style: solid;
+            border-color: #20B2AA;
+
+                    }
+        .bg-danger{background-color:#f2dede;
+            border-radius: 10px;
+            border-style: solid;
+            border-color: #20B2AA;
+                    }
+
+        .myresult {
+            position: relative;
+              width: 20%;
+              height: 30%;
+              padding: 10px;
+              border: 5px solid gray;
+              margin-left: 40%;
+              text-align: center;
+              font-size: 170%;
+        }
+
+
+        .button{
+            background-color: #333;
+            color: white;
+            padding: 10px 15px;
+            border:none;
+            border-radius: 10px;
+        }
+
+
+        .button:hover{
+            background-color:  #0C2340;
+            color: #F26522;
+        }
+        .fix-me{
+            position: fixed;
+            top:95%;
+            left: 47%;
+            border-top-left-radius: 500px;
+            border-top-right-radius: 500px;
+        }
+
+    </style>
+
+    </head>
+    <body style="background-image: url('background-image.jpg'); ">
+        <!-- <div style="background-color: purple;">  -->
+
+            <div class="container" style="background-color: #DCDCDC;  width: 85%; border-radius: 15px; height: 100vh;">
+                <h1 style="color:green; font-family:courier; text-align: center;" >Is your review positive, or negative?</h1>
+                <p style="color:#0000CD; font-family:'Brush Script MT', cursive; text-align: center; font-size: 25px;">  Enter your review below and click submit to find out... </p>
+                <form method="POST"
+                      action="https://z403lrusx8.execute-api.us-east-1.amazonaws.com/ChineduProduction"
+                      onsubmit="return submitForm(this);" 
+                      >                     
+                    <div class="form-group">
+                        <textarea class="form-control"  rows="5" id="review" placeholder="Please write your review here." style="background-color: #F5FFFA; border-radius: 20px; color: #696969; box-shadow: 3px 2px 2px 2px;"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-default" style="border-radius: 0px 40px 0px 40px; box-shadow: 5px 5px #9932CC;">Submit</button>
+                    <!-- </div> -->
+                </form>
+                <div class="myresult">
+                    <p class="bg-success" id="result"></p>
+                </div>
+            </div>
+            <a class="fix-me button" href="../Nedum/teaching.html"> Home </a>
+    </body>
+</html>
